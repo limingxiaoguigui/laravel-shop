@@ -15,5 +15,10 @@ Route::get('/', 'PagesController@root')->name('root');
 Auth::routes(['verify' => true]);
 // auth 中间件代表需要登录，verified中间件代表需要经过邮箱验证
 Route::group(['middleware' => ['auth', 'verified']], function () {
+    // 收货地址的列表路由
     Route::get('user_addresses', 'UserAddressesController@index')->name('user_addresses.index');
+    // 收货地址的新建页面路由
+    Route::get('user_addresses/create', 'UserAddressesController@create')->name('user_addresses.create');
+    // 收货地址新建处理路由
+    Route::post('user_addresses', 'UserAddressesController@store')->name('user_addresses.store');
 });
