@@ -45,4 +45,14 @@ class ProductsController extends Controller
 
         return view('products.index', ['products' => $products, 'filters' => ['search' => $search, 'order' => $order]]);
     }
+    //商品详情页
+    public function show(Product $product, Request $request)
+    {
+        //判断商品是否已经上架，如果没有则抛出异常
+        if (!$product->on_sale) {
+            throw new \Exception('商品未上架');
+        }
+
+        return view('products.show', ['product' => $product]);
+    }
 }
