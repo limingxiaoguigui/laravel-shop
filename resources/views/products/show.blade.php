@@ -78,35 +78,31 @@
         });
         //监听收藏按钮的点击事件
         $('.btn-favor').click(function () {
-            //发起一个post ajax 请求 请求url通过后端的route（）函数生成
-            axios.post('{{route('products.favor',['product'=>$product->id])}}')
-                .then(function(){
-                    //请求成功会执行这个回调
-                    swal('操作成功','','success');
-                },function(error){
-                    //请求失败会执行这个回调
-                    //如果返回401则代表没有登陆
-                    if(error.response&&error.response.status === 401){
-                        swal('请先登录','','error');
-                    }else if(error.response&&error.response.data.msg){
-                        // 其他msg字段情况，将msg提示给用户
-                        swal(error.response.data.msg,'','error');
-                    }else{
-                        // 其他情况系统挂了
-                        swal('系统错误','','error');
-                    }
-
+            axios.post('{{ route('products.favor', ['product' => $product->id]) }}')
+                .then(function () {
+                swal('操作成功', '', 'success')
+                .then(function () {  // 这里加了一个 then() 方法
+                    location.reload();
+                    });
+                }, function(error) {
+                if (error.response && error.response.status === 401) {
+                    swal('请先登录', '', 'error');
+                }  else if (error.response && error.response.data.msg) {
+                    swal(error.response.data.msg, '', 'error');
+                }  else {
+                    swal('系统错误', '', 'error');
+                }
                 });
         });
-        //取消收藏逻辑
+
         $('.btn-disfavor').click(function () {
-           axios.delete('{{route('products.disfavor',['product'=>$product->id])}}')
+        axios.delete('{{ route('products.disfavor', ['product' => $product->id]) }}')
             .then(function () {
-                swal('操作成功','','success')
+            swal('操作成功', '', 'success')
                 .then(function () {
-                    location.reload();
+                location.reload();
                 });
-            })
+            });
         });
     });
 </script>
