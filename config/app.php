@@ -120,7 +120,7 @@ return [
     */
 
     'key' => env('APP_KEY'),
-
+    'order_ttl' => 1800,
     'cipher' => 'AES-256-CBC',
 
     /*
