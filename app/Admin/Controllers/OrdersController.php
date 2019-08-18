@@ -123,4 +123,14 @@ class OrdersController extends Controller
 
         return $form;
     }
+    /**
+     * 订单详情
+     *
+     */
+    public function  show(Order $order, Content $content)
+    {
+        return $content
+            ->header('查看订单')
+            ->body(view('admin.orders.show', ['order' => $order])); //body方法可以接受Laravel的视图作为参数
+    }
 }
