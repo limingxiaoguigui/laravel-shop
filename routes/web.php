@@ -54,8 +54,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     //评价页面
     Route::get('orders/{order}/review', 'OrdersController@review')->name('orders.review.show');
     //评价逻辑
-    Route::post('orders/{order}/review','OrdersController@sendReview')->name('orders.review.store');
-
+    Route::post('orders/{order}/review', 'OrdersController@sendReview')->name('orders.review.store');
+    //退款
+    Route::post('orders/{order}/apply_refund', 'OrdersController@applyRefund')->name('orders.apply_refund');
 });
 //商品信息
 Route::get('products/{product}', 'ProductsController@show')->name('products.show');
