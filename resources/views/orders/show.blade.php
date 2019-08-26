@@ -80,6 +80,14 @@
                             @endif
                     </div>
                     <div class="order-summary text-right">
+                        {{-- 优惠券开始 --}}
+                        @if ($order->couponCode)
+                        <div class="text-primary">
+                            <span>优惠信息：</span>
+                            <div class="value">{{$order->couponCode->description}}</div>
+                        </div>
+                        @endif
+                        {{-- 优惠券结束 --}}
                         <div class="total-amount">
                             <span>订单总价：</span>
                             <div class="value">￥{{$order->total_amount}}</div>
