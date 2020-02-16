@@ -1,4 +1,11 @@
 <?php
+/*
+ * @Description:
+ * @Author: LMG
+ * @Date: 2020-02-16 11:32:03
+ * @LastEditors: LMG
+ * @LastEditTime: 2020-02-16 12:30:48
+ */
 
 /*
 |--------------------------------------------------------------------------
@@ -10,6 +17,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('alipay', function () {
+    return app('alipay')->web([
+        'out_trade_no' => time(),
+        'total_amount' => '1',
+        'subject' => 'test subject - 测试',
+    ]);
+});
 Route::redirect('/', '/products')->name('root');
 Route::get('products', 'ProductsController@index')->name('products.index');
 Auth::routes(['verify' => true]);
