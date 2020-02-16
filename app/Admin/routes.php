@@ -1,4 +1,11 @@
 <?php
+/*
+ * @Description:
+ * @Author: LMG
+ * @Date: 2020-02-16 11:32:02
+ * @LastEditors: LMG
+ * @LastEditTime: 2020-02-16 16:50:52
+ */
 
 use Illuminate\Routing\Router;
 
@@ -27,4 +34,12 @@ Route::group([
     $router->get('coupon_codes/{id}/edit', 'CouponCodesController@edit');
     $router->put('coupon_codes/{id}', 'CouponCodesController@update');
     $router->delete('coupon_codes/{id}', 'CouponCodesController@destroy');
+
+    $router->get('categories', 'CategoriesController@index');
+    $router->get('categories/create', 'CategoriesController@create');
+    $router->get('categories/{id}/edit', 'CategoriesController@edit');
+    $router->post('categories', 'CategoriesController@store');
+    $router->put('categories/{id}', 'CategoriesController@update');
+    $router->delete('categories/{id}', 'CategoriesController@destroy');
+    $router->get('api/categories', 'CategoriesController@apiIndex');
 });
