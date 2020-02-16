@@ -1,4 +1,11 @@
 <?php
+/*
+ * @Description:
+ * @Author: LMG
+ * @Date: 2020-02-16 11:32:02
+ * @LastEditors: LMG
+ * @LastEditTime: 2020-02-16 14:18:40
+ */
 
 namespace App\Models;
 
@@ -27,5 +34,13 @@ class Product extends Model
             return $this->attributes['image'];
         }
         return \Storage::disk('public')->url($this->attributes['image']);
+    }
+    /**
+     * 和分类的关联关系
+     * @return void
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }
