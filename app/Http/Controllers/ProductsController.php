@@ -1,4 +1,11 @@
 <?php
+/*
+ * @Description:
+ * @Author: LMG
+ * @Date: 2020-02-16 11:32:02
+ * @LastEditors: LMG
+ * @LastEditTime: 2020-02-17 09:16:24
+ */
 
 namespace App\Http\Controllers;
 
@@ -6,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Exceptions\InvalidRequestException;
 use App\Models\OrderItem;
+use App\Models\Category;
 
 class ProductsController extends Controller
 {
@@ -28,7 +36,18 @@ class ProductsController extends Controller
                     });
             });
         }
-
+        //如果传入category_id字段，并且在数据库中有对应的类目
+        if ($request->input('category_id') && $category = Category::find($request->input('category_id'))) {
+            //如果是一个父类目
+            if ($category->is_directory) {
+                //则筛选出该父类目所有子类目的商品
+                $builder->whereHas('category', function ($query) use ($category) {
+                    $query->where('path', 'like', $category->path . $category->id . '-%');
+                });
+            } else {
+                $builder->where('category_id', $category->id);
+            }
+        }
         // 是否有提交 order 参数，如果有就赋值给 $order 变量
         // order 参数用来控制商品的排序规则
         if ($order = $request->input('order', '')) {
@@ -45,7 +64,7 @@ class ProductsController extends Controller
 
         $products = $builder->paginate(16);
 
-        return view('products.index', ['products' => $products, 'filters' => ['search' => $search, 'order' => $order]]);
+        return view('products.index', ['products' => $products, 'filters' => ['search' => $search, 'order' => $order], 'category' => $category ?? null]);
     }
     //商品详情页
     public function show(Product $product, Request $request)
