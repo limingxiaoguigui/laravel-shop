@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CrowdFundingOrderRequest;
+use App\Models\ProductSku;
 use Illuminate\Http\Request;
 use App\Http\Requests\OrderRequest;
 use App\Models\UserAddress;
@@ -14,6 +16,7 @@ use App\Events\OrderReviewed;
 use App\Http\Requests\ApplyRefundRequest;
 use App\Exceptions\CouponCodeUnavailableException;
 use App\Models\CouponCode;
+
 
 class OrdersController extends Controller
 {
@@ -131,5 +134,16 @@ class OrdersController extends Controller
             'extra' => $extra
         ]);
         return $order;
+    }
+    //创建一个新的方法用于接受众筹商品下单请求
+    // 创建一个新的方法用于接受众筹商品下单请求
+    public function crowdfunding(CrowdFundingOrderRequest $request, OrderService $orderService)
+    {
+        $user    = $request->user();
+        $sku     = ProductSku::find($request->input('sku_id'));
+        $address = UserAddress::find($request->input('address_id'));
+        $amount  = $request->input('amount');
+
+        return $orderService->crowdfunding($user, $address, $sku, $amount);
     }
 }

@@ -4,7 +4,7 @@
  * @Author: LMG
  * @Date: 2020-02-16 11:32:03
  * @LastEditors: LMG
- * @LastEditTime: 2020-02-16 12:30:48
+ * @LastEditTime: 2020-02-18 11:03:20
  */
 
 /*
@@ -73,6 +73,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('orders/{order}/apply_refund', 'OrdersController@applyRefund')->name('orders.apply_refund');
     //优惠券检查是否失效
     Route::get('coupon_codes/{code}', 'CouponCodesController@show')->name('coupon_codes.show');
+    //众筹商品下单
+    Route::post('crowdfunding_orders', 'OrdersController@crowdfunding')->name('crowdfunding_orders.store');
 });
 //商品信息
 Route::get('products/{product}', 'ProductsController@show')->name('products.show');
