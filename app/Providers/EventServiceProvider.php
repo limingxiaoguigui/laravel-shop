@@ -1,4 +1,11 @@
 <?php
+/*
+ * @Description:
+ * @Author: LMG
+ * @Date: 2020-02-16 11:32:02
+ * @LastEditors: LMG
+ * @LastEditTime: 2020-02-18 17:00:59
+ */
 
 namespace App\Providers;
 
@@ -11,6 +18,7 @@ use App\Listeners\UpdateProductSoldCount;
 use App\Listeners\SendOrderPaidMail;
 use App\Events\OrderReviewed;
 use App\Listeners\UpdateProductRating;
+use App\Listeners\UpdateCrowdfundingProductProgress;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -26,6 +34,7 @@ class EventServiceProvider extends ServiceProvider
         OrderPaid::class => [
             UpdateProductSoldCount::class,
             SendOrderPaidMail::class,
+            UpdateCrowdfundingProductProgress::class,
         ],
         OrderReviewed::class => [
             UpdateProductRating::class,

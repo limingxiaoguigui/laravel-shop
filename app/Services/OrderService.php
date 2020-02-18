@@ -4,7 +4,7 @@
  * @Author: LMG
  * @Date: 2020-02-16 11:32:02
  * @LastEditors: LMG
- * @LastEditTime: 2020-02-18 14:59:28
+ * @LastEditTime: 2020-02-18 16:24:29
  */
 
 namespace App\Services;
@@ -43,6 +43,7 @@ class OrderService
                     'zip' => $address->zip,
                     'contact_name' => $address->contact_name,
                     'contact_phone' => $address->contact_phone,
+                    'type' => Order::TYPE_NORMAL
                 ],
                 'remark' => $remark,
                 'total_amount' => 0
@@ -116,6 +117,7 @@ class OrderService
                     'zip'           => $address->zip,
                     'contact_name'  => $address->contact_name,
                     'contact_phone' => $address->contact_phone,
+                    'type' => Order::TYPE_CROWDFUNDING
                 ],
                 'remark'       => '',
                 'total_amount' => $sku->price * $amount,
