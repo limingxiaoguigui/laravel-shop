@@ -4,7 +4,7 @@
  * @Author: LMG
  * @Date: 2020-02-16 11:32:03
  * @LastEditors: LMG
- * @LastEditTime: 2020-02-18 11:03:20
+ * @LastEditTime: 2020-02-18 17:46:56
  */
 
 /*
@@ -18,6 +18,9 @@
 |
 */
 Route::get('alipay', function () {
+
+    dd(ngrok_url('products.index'));
+
     return app('alipay')->web([
         'out_trade_no' => time(),
         'total_amount' => '1',
