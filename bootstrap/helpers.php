@@ -4,7 +4,7 @@
  * @Author: LMG
  * @Date: 2020-02-16 11:32:02
  * @LastEditors: LMG
- * @LastEditTime: 2020-02-18 17:25:12
+ * @LastEditTime: 2020-02-19 11:27:33
  */
 function route_class()
 {
@@ -20,4 +20,10 @@ function ngrok_url($routeName, $parameters = [])
         return $url . route($routeName, $parameters, false);
     }
     return  route($routeName, $parameters);
+}
+
+//默认的精度为小数点的后两位
+function big_number($number, $scale = 2)
+{
+    return new \Moontoast\Math\BigNumber($number, $scale);
 }
